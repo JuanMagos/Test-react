@@ -1,11 +1,10 @@
-import { applyMiddleware, createStore } from 'redux';   
-import users from '../data/users.json'
+import { applyMiddleware, createStore, compose } from 'redux';   
 import rootReducer from '../reducers/index';
+import thunk from 'redux-thunk';
+const middleware = [thunk];
 
-
-const initialUser = users;
-
-
-const store = createStore(rootReducer);
-
+const store = createStore(rootReducer, {},   compose(
+    applyMiddleware(...middleware)
+  ));
+  
 export default store;

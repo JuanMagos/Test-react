@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {reduxForm, Field} from 'redux-form';
-
+import { connect } from 'react-redux';
+import { submitInfo } from '../actions/submitAction'
 
 class MyForm extends Component {
   handleSubmit = formValues => {
-      console.log(formValues)
+      this.props.submitInfo(formValues);
   }  
   render() {
     return (
@@ -33,4 +34,4 @@ class MyForm extends Component {
   }
 }
 
-export default reduxForm({ form: 'newCarer'})(MyForm);
+export default connect(null,{submitInfo})(reduxForm({ form: 'newCarer'})(MyForm));

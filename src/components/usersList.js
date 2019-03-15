@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import store from '../store/store'
-
-const state = store.getState();
+import { connect } from 'react-redux';
 
 class UsersList extends Component {
 
@@ -19,17 +17,15 @@ class UsersList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {state.user.map((userDetail, index) => {
-                        return <tr key={userDetail.email}>
+                    {this.props.users.map((userDetail, index) => {
+                        return (<tr key={userDetail.email}>
                             <th>{userDetail.pais}</th>
                             <th>{userDetail.name}</th>
                             <th>{userDetail.phone}</th>
                             <th>{userDetail.email}</th>
-                        </tr>
+                        </tr>)
                     })}
                 </tbody>
-
-
                 </table>
             </div>
         </div>
@@ -38,4 +34,10 @@ class UsersList extends Component {
   }
 }
 
-export default UsersList;
+const mapStateToProps = (state) => {
+    return {
+        users: state.user
+    }
+  }
+
+export default connect(mapStateToProps, {})(UsersList);
